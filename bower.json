@@ -1,0 +1,29 @@
+{
+  "name": "vcard-skill-item",
+  "version": "0.0.1",
+  "description": "Skill item",
+  "private": true,
+  "authors": [
+    "YCLIN"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "vcard"
+  ],
+  "main": "vcard-skill-item.html",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vcard/vcard-skill-item.git"
+  },
+  "license": "MIT",
+  "ignore": [],
+  "dependencies": {
+    "promise-polyfill": "polymerlabs/promise-polyfill#^1.0.0",
+    "polymer": "Polymer/polymer#^1.0.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "polymer/web-component-tester#^3.4.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  }
+}

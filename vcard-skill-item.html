@@ -1,0 +1,106 @@
+<!-- Imports polymer -->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
+<script type="text/javascript" src="lib/jquery.knob.min.js"></script>
+<script type="text/javascript" src="lib/jquery.appear.js"></script>
+<!-- Defines element markup -->
+<dom-module id="vcard-skill-item">
+    <template>
+        <style>
+        .skill-bar[media-query-767] {
+            margin-right: 40px;
+            display: inline-block;
+        }
+        
+        :host.last .skill-bar[media-query-767] {
+            margin: 0;
+        }
+        
+        .skill-bar input[type=text] {
+            font: 300 20px "Open Sans", sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        input {
+            background: #f0f0f0;
+            padding: 15px;
+            border-top: none;
+            border-right: none;
+            border-bottom: 1px solid #f0f0f0;
+            border-left: none;
+            -webkit-transition: ease-out .2s;
+            -moz-transition: ease-out .2s;
+            -o-transition: ease-out .2s;
+            transition: ease-out .2s;
+        }
+        .skill-bar h4 {
+            margin: 10px 0;
+            color: #fff;
+            font-weight: 400;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        </style>
+        <iron-media-query query="(max-width: 767px)" query-matches="{{mediaQuery767}}"></iron-media-query>
+        <div class="skill-bar" media-query-767$="{{mediaQuery767}}">
+            <input type="text" value="0" data-number$="{{percent}}" class="dial" />
+            <h4>{{skill}}</h4>
+        </div>
+    </template>
+</dom-module>
+<!-- Registers custom element -->
+<script>
+Polymer({
+    is: 'vcard-skill-item', //Registramos el nombre del componente
+    properties: { //Propiedades del componente
+        percent: {
+            type: Number,
+            value: 50
+        },
+        skill: {
+            type: String,
+            value: 'SKILL'
+        }
+    },
+    ready: function() {
+        var dial = $(this.$$('.dial'));
+        dial.knob({
+            width: '100',
+            height: '100',
+            thickness: .03,
+            fgColor: 'rgb(255, 255, 255)',
+            bgColor: 'rgba(255, 255, 255, .0)',
+            inputColor: 'rgb(255, 255, 255)',
+            readOnly: !0,
+            font: 'Open Sans',
+            fontWeight: '300',
+            parse: function(e) {
+                return parseInt(e, 10);
+            },
+            format: function(e) {
+                return e + '%';
+            }
+        });
+        var skillBar = this.$$('.skill-bar');
+        var percent = dial.data('number');
+        $(skillBar).appear(function() {
+            $({
+                value: 0
+            }).animate({
+                value: percent
+            }, {
+                duration: 2e3,
+                easing: 'swing',
+                step: function() {
+                    dial.val(Math.ceil(this.value)).trigger('change');
+                }
+            });
+        }, {
+            accX: 0,
+            accY: -10
+        });
+
+    }
+});
+</script>
