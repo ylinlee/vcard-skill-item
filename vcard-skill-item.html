@@ -7,9 +7,18 @@
 <dom-module id="vcard-skill-item">
     <template>
         <style>
+        .skill-bar[media-query-992] {
+            display: inline-block;
+        }
+        
         .skill-bar[media-query-767] {
             margin-right: 40px;
             display: inline-block;
+        }
+        
+        .skill-bar [media-query-480] {
+            width: 100%;
+            margin: 0 0 40px;
         }
         
         :host.last .skill-bar[media-query-767] {
@@ -33,6 +42,7 @@
             -o-transition: ease-out .2s;
             transition: ease-out .2s;
         }
+        
         .skill-bar h4 {
             margin: 10px 0;
             color: #fff;
@@ -42,8 +52,10 @@
             text-transform: uppercase;
         }
         </style>
+        <iron-media-query query="(max-width: 480px)" query-matches="{{mediaQuery480}}"></iron-media-query>
         <iron-media-query query="(max-width: 767px)" query-matches="{{mediaQuery767}}"></iron-media-query>
-        <div class="skill-bar" media-query-767$="{{mediaQuery767}}">
+        <iron-media-query query="(min-width: 992px)" query-matches="{{mediaQuery992}}"></iron-media-query>
+        <div class="skill-bar" media-query-480$="{{mediaQuery480}}" media-query-767$="{{mediaQuery767}}" media-query-992$="{{mediaQuery992}}">
             <input type="text" value="0" data-number$="{{percent}}" class="dial" />
             <h4>{{skill}}</h4>
         </div>
