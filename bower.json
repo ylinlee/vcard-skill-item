@@ -1,6 +1,6 @@
 {
   "name": "vcard-skill-item",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Skill item",
   "private": true,
   "authors": [
@@ -19,6 +19,6 @@
   "license": "MIT",
   "ignore": [],
   "dependencies": {
-        "polymer": "Polymer/polymer#1.0.0"
+    "polymer": "Polymer/polymer#1.0.0"
   }
 }
